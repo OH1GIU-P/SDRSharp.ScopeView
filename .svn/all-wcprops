@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/sdrsharp/!svn/ver/871/branches/bobrich/AutoTunerPlugin/ScopeView
+END
+ScopeViewPanel.resx
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/sdrsharp/!svn/ver/820/branches/bobrich/AutoTunerPlugin/ScopeView/ScopeViewPanel.resx
+END
+ScopeViewPanel.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/sdrsharp/!svn/ver/860/branches/bobrich/AutoTunerPlugin/ScopeView/ScopeViewPanel.Designer.cs
+END
+ScopeViewPlugin.cs
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/sdrsharp/!svn/ver/860/branches/bobrich/AutoTunerPlugin/ScopeView/ScopeViewPlugin.cs
+END
+SDRSharp.ScopeView.csproj
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/sdrsharp/!svn/ver/820/branches/bobrich/AutoTunerPlugin/ScopeView/SDRSharp.ScopeView.csproj
+END
+ScopeViewPanel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/sdrsharp/!svn/ver/871/branches/bobrich/AutoTunerPlugin/ScopeView/ScopeViewPanel.cs
+END

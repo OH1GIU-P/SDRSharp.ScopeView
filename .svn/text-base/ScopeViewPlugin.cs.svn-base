@@ -1,0 +1,89 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using SDRSharp.Common;
+using System.Windows.Forms;
+using System.Threading;
+using SDRSharp.Radio;
+
+namespace SDRSharp.ScopeView
+{
+    public unsafe class  ScopeViewPlugin : ISharpPlugin, IAudioProcessor
+    {
+        private const string _displayName = "Scope View";
+        private ISharpControl _controlInterface;
+        private ScopeViewPanel _scopeViewPanel;
+        private double _sampleRate;
+        private int _outputBufferSize;
+
+        private bool _bypass;
+
+        public bool Bypass
+        {
+            get { return _bypass; }
+            set { _bypass = value; }
+        }
+
+        private FloatFifoStream _audioStreamIn;
+        private FloatFifoStream _audioStreamOut;
+
+        private bool _update;
+
+        private bool _stopThread;
+        private Thread _workerThread;
+        public int GoertzelFreq;
+
+        public bool HasGui
+        {
+            get { return true; }
+        }
+
+        public UserControl GuiControl
+        {
+            get { return _scopeViewPanel; }
+        }
+
+        public bool HasData
+        {
+            get { return false; }
+        }
+
+        public string DisplayName
+        {
+            get { return _displayName; }
+        }
+
+        public void Closing()
+        {
+
+        }
+
+        public double SampleRate
+        {
+            get { return _sampleRate; }
+            set { _sampleRate = value; }
+        }
+
+        public void Process(float* audioBuffer, int length)
+        {
+            if (!_bypass)
+            {
+                _scopeViewPanel.Render(audioBuffer, length);
+            }
+        }
+
+        public void Initialize(ISharpControl control)
+        {
+            _controlInterface = control;
+            _scopeViewPanel = new ScopeViewPanel(_controlInterface);
+            _controlInterface.RegisterStreamHook(this);
+        }
+
+
+        public void Close()
+        {
+        }
+
+    }
+}
