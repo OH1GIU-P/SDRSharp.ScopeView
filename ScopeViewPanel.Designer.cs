@@ -40,6 +40,7 @@
             this.cbActive = new System.Windows.Forms.CheckBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.cbGreenScope = new System.Windows.Forms.CheckBox();
+            this.labelStatus = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scopeSpeedTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.amplitudeTrackBar)).BeginInit();
@@ -148,10 +149,20 @@
             this.cbGreenScope.UseVisualStyleBackColor = true;
             this.cbGreenScope.CheckedChanged += new System.EventHandler(this.cbGreenScope_CheckedChanged);
             // 
+            // labelStatus
+            // 
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Location = new System.Drawing.Point(6, 388);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(35, 13);
+            this.labelStatus.TabIndex = 15;
+            this.labelStatus.Text = "label1";
+            // 
             // ScopeViewPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.cbGreenScope);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.cbActive);
@@ -185,5 +196,6 @@
         private System.Windows.Forms.CheckBox cbActive;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.CheckBox cbGreenScope;
+        private System.Windows.Forms.Label labelStatus;
     }
 }

@@ -23,6 +23,8 @@ namespace SDRSharp.ScopeView
         private Bitmap _lastBuffer = null;
         private bool _render = true;
         private Point[] _lastPoints;
+        private List<Point> _dataPoints = new List<Point>();
+        private int _lenLastPoints = 0;
 
         public ScopeViewPanel(ISharpControl control)
         {
@@ -33,6 +35,7 @@ namespace SDRSharp.ScopeView
             _graphics = scopePanel.CreateGraphics();
             ConfigureGraphics(_graphics);
             _lastPoints = new Point[scopePanel.Width + 2];
+            labelStatus.Text = "";
         }
 
 
@@ -136,6 +139,7 @@ namespace SDRSharp.ScopeView
                         var newY = (int)(scopePanel.Height / 2 + (strength * yIncrement));
                         _points[i + 1].X = newX;
                         _points[i + 1].Y = newY;
+                        _dataPoints.Add(_points[i + 1]);
                     }
                     _points[0] = _points[1];
                     _points[_points.Length - 1] = _points[_points.Length - 2];
@@ -144,6 +148,7 @@ namespace SDRSharp.ScopeView
                 }
             }
             Array.Copy(_points, _lastPoints, _points.Length);
+            _lenLastPoints = _points.Length;
         }
 
         public void Render(float* samples, int length)
@@ -201,9 +206,16 @@ namespace SDRSharp.ScopeView
                 {
                     using (System.IO.StreamWriter writer = new System.IO.StreamWriter("scopeData.txt"))
                     {
-                        for (int i = 0; i < _lastPoints.Length; i++)
+                        for (int i = 0; i < _lenLastPoints; i++)
                         {
                             writer.Write(_lastPoints[i].Y.ToString() + ";");
+                        }
+                    }
+                    using (System.IO.StreamWriter writer = new System.IO.StreamWriter("scopeAllData.txt"))
+                    {
+                        foreach (Point p in _dataPoints)
+                        {
+                            writer.Write(p.Y.ToString() + ";");
                         }
                     }
                 }
@@ -214,6 +226,7 @@ namespace SDRSharp.ScopeView
                         _lastBuffer.Save("scopePanel.jpg", ImageFormat.Jpeg);
                     }
                 }
+                labelStatus.Text = "Data saved";
             }
             catch (Exception)
             {
@@ -224,6 +237,12 @@ namespace SDRSharp.ScopeView
         private void cbActive_CheckedChanged(object sender, EventArgs e)
         {
             buttonSave.Enabled = !cbActive.Checked;
+            if (cbActive.Checked)
+            {
+                _dataPoints.Clear();
+                _lenLastPoints = 0;
+                labelStatus.Text = "";
+            }
         }
 
         private void cbGreenScope_CheckedChanged(object sender, EventArgs e)
